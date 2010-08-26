@@ -46,36 +46,42 @@ t11e.widget.jquery.text_highlighter = function ($, target, template, matcher) {
 };
 
 t11e.widget.jquery.text_token_filter_factory = function ($, tokens) {
-    var append_variant = function (target, token, before, after) {
-        var pos = token.lastIndexOf(before);
-        if (pos === token.length - before.length) {
-            var variant = token.substring(0, pos) + after;
-            if ($.inArray(variant, target) === -1) {
-                target.push(variant);
-            }
-        }
-    };
+//    var append_variant = function (target, token, before, after) {
+//        var pos = token.lastIndexOf(before);
+//        if (pos === token.length - before.length) {
+//            var variant = token.substring(0, pos) + after;
+//            if ($.inArray(variant, target) === -1) {
+//                target.push(variant);
+//            }
+//        }
+//    };
     var expanded_tokens = [];
     $(tokens).each(function (i, token) {
         if ($.inArray(token, expanded_tokens) === -1) {
-            expanded_tokens.push(token);
+            if (token.substr(token.length - 1, 1) === "*")
+            {
+                // deal with "startsWith" tokens
+                expanded_tokens.push(token.substr(0, token.length - 1));
+            } else {
+                expanded_tokens.push(token);
+            }
             // Manually duplicate some tokens with new suffixes if they
             // match, a partial reversion of step3 of the Porter stemmer
             // algorithm. Step2 y to i has been rolled into some of these.
-            append_variant(expanded_tokens, token, 'ive', 'iviti');
-            append_variant(expanded_tokens, token, 'ive', 'ivity');
-            append_variant(expanded_tokens, token, 'ble', 'biliti');
-            append_variant(expanded_tokens, token, 'ble', 'bility');
-            append_variant(expanded_tokens, token, 'ate', 'ator');
-            append_variant(expanded_tokens, token, 'ate', 'ation');
-            append_variant(expanded_tokens, token, 'ize', 'ization');
-            append_variant(expanded_tokens, token, 'ble', 'bli');
-            append_variant(expanded_tokens, token, 'ble', 'bly');
-            append_variant(expanded_tokens, token, 'ance', 'anci');
-            append_variant(expanded_tokens, token, 'ance', 'ancy');
-            append_variant(expanded_tokens, token, 'ence', 'enci');
-            append_variant(expanded_tokens, token, 'ence', 'ency');
-            append_variant(expanded_tokens, token, 'ate', 'ational');
+//            append_variant(expanded_tokens, token, 'ive', 'iviti');
+//            append_variant(expanded_tokens, token, 'ive', 'ivity');
+//            append_variant(expanded_tokens, token, 'ble', 'biliti');
+//            append_variant(expanded_tokens, token, 'ble', 'bility');
+//            append_variant(expanded_tokens, token, 'ate', 'ator');
+//            append_variant(expanded_tokens, token, 'ate', 'ation');
+//            append_variant(expanded_tokens, token, 'ize', 'ization');
+//            append_variant(expanded_tokens, token, 'ble', 'bli');
+//            append_variant(expanded_tokens, token, 'ble', 'bly');
+//            append_variant(expanded_tokens, token, 'ance', 'anci');
+//            append_variant(expanded_tokens, token, 'ance', 'ancy');
+//            append_variant(expanded_tokens, token, 'ence', 'enci');
+//            append_variant(expanded_tokens, token, 'ence', 'ency');
+//            append_variant(expanded_tokens, token, 'ate', 'ational');
         }
     });
     return function (token) {
