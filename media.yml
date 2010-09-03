@@ -93,6 +93,9 @@ groups:
         - widgets/js/t11e/widget/jquery/text_highlighter_plugin.js
         - widgets/js/t11e/widget/jquery/activate.js
         - widgets/js/t11e/widget/jquery/document.js
+        - widgets/js/t11e/widget/form/t11e_search.js
+        - widgets/js/t11e/widget/form/t11e_input.js
+
 
     - groupName: yui_css
       mediaType: css
