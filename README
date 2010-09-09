@@ -27,6 +27,3 @@ Then point your browser at http://localhost:8080.
 Note that you can override what port the server uses. For example:
 
     ant -Dserver.port=8888 compress-media server
-
-A PHP example is also included that can be viewed if the src/web directory is
-deployed inside the docroot of a Web server with PHP configured.
